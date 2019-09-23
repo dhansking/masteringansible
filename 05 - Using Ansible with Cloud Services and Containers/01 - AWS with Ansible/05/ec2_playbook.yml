@@ -33,7 +33,7 @@
          key_name: dhans1
          group: ansible
          instance_type: t2.micro
-         image: ami-a1f5e4c5
+         image: ami-0c322300a1dd5dc79
          region: us-east-1
          wait: true
          exact_count: 2
