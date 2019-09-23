@@ -15,9 +15,9 @@
   tasks:
     - name: Create a security group in AWS for SSH access and HTTP
       ec2_group:
-         name: ansible
+         name: ansible-tower
          description: Ansible Security Group
-         region: eu-west-2
+         region: us-east-1
          rules:
             - proto: tcp
               from_port: 80
