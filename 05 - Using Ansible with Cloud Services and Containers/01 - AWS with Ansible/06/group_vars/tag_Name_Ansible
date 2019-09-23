@@ -1,5 +1,5 @@
 ---
-ansible-tower_ssh_private_key_file: ~/.ssh/ansible-tower_aws.pem
+#ansible-tower_ssh_private_key_file: ~/.ssh/ansible_aws.pem
 ansible-tower_user: ec2-user
 ansible-tower_become: true
 ...
