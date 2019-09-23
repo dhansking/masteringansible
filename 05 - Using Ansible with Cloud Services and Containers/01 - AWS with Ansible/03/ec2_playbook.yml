@@ -17,7 +17,7 @@
       ec2_group:
          name: ansible
          description: Ansible Security Group
-         region: eu-west-2
+         region: us-east-1
          rules:
             - proto: tcp
               from_port: 80
@@ -34,7 +34,7 @@
          group: ansible
          instance_type: t2.micro
          image: ami-a1f5e4c5
-         region: eu-west-2
+         region: us-east-1
          wait: true
          exact_count: 20
          count_tag:
