@@ -15,7 +15,7 @@
   tasks:
     - name: Create a security group in AWS for SSH access and HTTP
       ec2_group:
-         name: ansible-tower-tower
+         name: ansible-tower
          description: Ansible Security Group
          region: us-east-1
          rules:
@@ -31,7 +31,7 @@
     - name: Provision a set of instances
       ec2:
          key_name: dhans1
-         group: ansible-tower-tower
+         group: ansible-tower
          instance_type: t2.micro
          image: ami-0c322300a1dd5dc79
          region: us-east-1
