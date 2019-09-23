@@ -22,7 +22,7 @@
             "centos3": null, 
             "centos2": null, 
             "centos1": {
-                "ansible_port": 2222
+                "ansible_port": 22
             }
         }, 
         "vars": {

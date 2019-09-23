@@ -76,7 +76,7 @@ class Inventory(object):
 
         self.hostvars = {
             'centos1': {
-                'ansible_port': 2222
+                'ansible_port': 22
             },
             'ubuntu-c': {
                 'ansible_connection': 'local'

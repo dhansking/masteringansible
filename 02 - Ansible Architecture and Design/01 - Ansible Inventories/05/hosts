@@ -1,5 +1,5 @@
 [centos]
-centos1:2222 ansible_user=root
+centos1:22 ansible_user=root
 centos2 ansible_user=root
 centos3 ansible_user=root
 

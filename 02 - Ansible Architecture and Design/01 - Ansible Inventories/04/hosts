@@ -1,5 +1,5 @@
 [centos]
-centos1 ansible_user=root ansible_port=2222
+centos1 ansible_user=root ansible_port=22
 centos2 ansible_user=root
 centos3 ansible_user=root
 

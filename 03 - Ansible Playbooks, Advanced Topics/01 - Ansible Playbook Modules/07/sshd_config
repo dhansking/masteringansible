@@ -1,7 +1,7 @@
 ## Custom for centos1
 Host centos1
   User root
-  Port 2222
+  Port 22
 
 ## Defaults
 
