@@ -30,13 +30,13 @@
 
     - name: Provision a set of instances
       ec2:
-         key_name: my_ansible-tower_aws_keypair
+         key_name: dhans1
          group: ansible-tower
          instance_type: t2.micro
          image: ami-a1f5e4c5
          region: us-east-1
          wait: true
-         exact_count: 20
+         exact_count: 2
          count_tag:
             Name: AnsibleNginxWebservers
          instance_tags:
@@ -64,7 +64,7 @@
   # can also be used for pre and post tasks
   tasks:
     - debug:
-        msg: "Check http://{{ ansible-tower_host }}"
+        msg: "Check http://{{ ansible_host }}"
 
     - pause:
         prompt: "Verify service availability and continue to terminate"
