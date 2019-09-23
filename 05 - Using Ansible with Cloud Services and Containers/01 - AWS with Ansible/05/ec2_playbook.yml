@@ -15,7 +15,7 @@
   tasks:
     - name: Create a security group in AWS for SSH access and HTTP
       ec2_group:
-         name: ansible
+         name: ansible-tower
          description: Ansible Security Group
          region: us-east-1
          rules:
@@ -30,8 +30,8 @@
 
     - name: Provision a set of instances
       ec2:
-         key_name: my_ansible_aws_keypair
-         group: ansible
+         key_name: my_ansible-tower_aws_keypair
+         group: ansible-tower
          instance_type: t2.micro
          image: ami-a1f5e4c5
          region: us-east-1
@@ -64,7 +64,7 @@
   # can also be used for pre and post tasks
   tasks:
     - debug:
-        msg: "Check http://{{ ansible_host }}"
+        msg: "Check http://{{ ansible-tower_host }}"
 
     - pause:
         prompt: "Verify service availability and continue to terminate"

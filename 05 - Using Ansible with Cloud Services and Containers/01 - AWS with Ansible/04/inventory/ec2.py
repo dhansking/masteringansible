@@ -28,7 +28,7 @@ If you're using boto profiles (requires boto>=2.24.0) you can choose a profile
 using the --boto-profile command line argument (e.g. ec2.py --boto-profile prod) or using
 the AWS_PROFILE variable:
 
-    AWS_PROFILE=prod ansible-playbook -i ec2.py myplaybook.yml
+    AWS_PROFILE=prod ansible-tower-playbook -i ec2.py myplaybook.yml
 
 For more details, see: http://docs.pythonboto.org/en/latest/boto_config_tut.html
 
@@ -113,7 +113,7 @@ be used instead.
     'availability_zone': 'us-east-1a', # attribute
     'private_dns_name': '172.31.0.1',  # attribute
     'ec2_tag_deployment': 'blue',      # tag
-    'ec2_tag_clusterid': 'ansible',    # tag
+    'ec2_tag_clusterid': 'ansible-tower',    # tag
     'ec2_tag_Name': 'webserver',       # tag
     ...
 }
@@ -125,7 +125,7 @@ destination_format_tags: Name,clusterid,deployment,private_dns_name
 ...
 
 These settings would produce a destination_format as the following:
-'webserver-ansible-blue-172.31.0.1'
+'webserver-ansible-tower-blue-172.31.0.1'
 '''
 
 # (c) 2012, Peter Sankauskas
@@ -160,7 +160,7 @@ from boto import route53
 from boto import sts
 import six
 
-from ansible.module_utils import ec2 as ec2_utils
+from ansible-tower.module_utils import ec2 as ec2_utils
 
 HAS_BOTO3 = False
 try:
@@ -188,7 +188,7 @@ DEFAULTS = {
     'aws_security_token': None,
     'boto_profile': None,
     'cache_max_age': '300',
-    'cache_path': '~/.ansible/tmp',
+    'cache_path': '~/.ansible-tower/tmp',
     'destination_variable': 'public_dns_name',
     'elasticache': 'True',
     'eucalyptus': 'False',
@@ -452,7 +452,7 @@ class Ec2Inventory(object):
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
 
-        cache_name = 'ansible-ec2'
+        cache_name = 'ansible-tower-ec2'
         cache_id = self.boto_profile or os.environ.get('AWS_ACCESS_KEY_ID', self.credentials.get('aws_access_key_id'))
         if cache_id:
             cache_name = '%s-%s' % (cache_name, cache_id)
@@ -573,7 +573,7 @@ class Ec2Inventory(object):
 
         if self.iam_role:
             sts_conn = sts.connect_to_region(region, **connect_args)
-            role = sts_conn.assume_role(self.iam_role, 'ansible_dynamic_inventory')
+            role = sts_conn.assume_role(self.iam_role, 'ansible-tower_dynamic_inventory')
             connect_args['aws_access_key_id'] = role.credentials.access_key
             connect_args['aws_secret_access_key'] = role.credentials.secret_key
             connect_args['security_token'] = role.credentials.session_token
@@ -859,7 +859,7 @@ class Ec2Inventory(object):
         return '\n'.join(errors)
 
     def fail_with_error(self, err_msg, err_operation=None):
-        '''log an error to std err for ansible-playbook to consume and exit'''
+        '''log an error to std err for ansible-tower-playbook to consume and exit'''
         if err_operation:
             err_msg = 'ERROR: "{err_msg}", while: {err_operation}'.format(
                 err_msg=err_msg, err_operation=err_operation)
@@ -1067,7 +1067,7 @@ class Ec2Inventory(object):
         self.push(self.inventory, 'ec2', hostname)
 
         self.inventory["_meta"]["hostvars"][hostname] = self.get_host_info_dict_from_instance(instance)
-        self.inventory["_meta"]["hostvars"][hostname]['ansible_host'] = dest
+        self.inventory["_meta"]["hostvars"][hostname]['ansible-tower_host'] = dest
 
     def add_rds_instance(self, instance, region):
         ''' Adds an RDS instance to the inventory and index, as long as it is
@@ -1188,7 +1188,7 @@ class Ec2Inventory(object):
         self.push(self.inventory, 'rds', hostname)
 
         self.inventory["_meta"]["hostvars"][hostname] = self.get_host_info_dict_from_instance(instance)
-        self.inventory["_meta"]["hostvars"][hostname]['ansible_host'] = dest
+        self.inventory["_meta"]["hostvars"][hostname]['ansible-tower_host'] = dest
 
     def add_elasticache_cluster(self, cluster, region):
         ''' Adds an ElastiCache cluster to the inventory and index, as long as

@@ -6,7 +6,7 @@
     name: epel-release
     update_cache: yes
     state: latest
-  when: ansible_distribution == 'CentOS'
+  when: ansible-tower_distribution == 'CentOS'
   tags:
     - install-epel
 
@@ -15,7 +15,7 @@
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     update_cache: yes
     state: latest
-  when: ansible_distribution == 'RedHat'
+  when: ansible-tower_distribution == 'RedHat'
   tags:
     - install-epel
 
@@ -31,7 +31,7 @@
     name: patch
     update_cache: yes
     state: latest
-  when: ansible_os_family == 'RedHat'
+  when: ansible-tower_os_family == 'RedHat'
   tags:
     - patch-nginx
 
@@ -39,7 +39,7 @@
   patch:
     src: nginx.conf.centos.patch
     dest: /etc/nginx/nginx.conf
-  when: ansible_os_family == 'RedHat'
+  when: ansible-tower_os_family == 'RedHat'
   tags:
     - patch-nginx
 
@@ -84,7 +84,7 @@
     service: http
     permanent: true
     state: enabled
-  when: ansible_distribution == 'CentOS'
+  when: ansible-tower_distribution == 'CentOS'
   notify: Reload Firewall
   tags:
     - nginx-open-firewall
