@@ -167,16 +167,16 @@
                 <div class="unit span-grid">
 
                     <img src="
-                              {%- if ansible-tower_distribution == 'CentOS' -%}
+                              {%- if ansible_distribution == 'CentOS' -%}
                               {{ centos_logo }}
-                              {%- elif ansible-tower_distribution == 'Ubuntu' -%}
+                              {%- elif ansible_distribution == 'Ubuntu' -%}
                               {{ ubuntu_logo }}
-                              {%- elif ansible-tower_distribution == 'RedHat' -%}
+                              {%- elif ansible_distribution == 'RedHat' -%}
                               {{ redhat_logo }}
                               {%- endif %}
 " class="intro" alt="mainpic">
                     <h1>Mastering Ansible</h1>
-                    <p>{{ ansible-tower_managed }}</p>
+                    <p>{{ ansible_managed }}</p>
                     <br>
                     <p>Welcome to the Mastering Ansible Course, I'm your host for this, James Spurin, in this course we'll be covering the following:
                     </p>
