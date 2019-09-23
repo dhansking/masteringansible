@@ -66,8 +66,8 @@
     - debug:
         msg: "Check http://{{ ansible_host }}"
 
-    - pause:
-        prompt: "Verify service availability and continue to terminate"
+   # - pause:
+   #     prompt: "Verify service availability and continue to terminate"
 
 # Three dots indicate the end of a YAML document
 ...
